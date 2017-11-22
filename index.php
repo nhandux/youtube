@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test ứng dụng Jwplayer</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="sript.js"></script>
+</head>
+<body>
+	
+  
+    <style>
+#video_page{
+}
+#video_page h4{
+	padding-left:10px;
+	padding-bottom:5px;
+}
+.div_media{
+	float:right;
+	width:610px;
+	padding:0 10px;
+	padding-top:10px;
+	border:1px solid #282828;
+	/*height:410px;*/
+}
+#mediaplayer{
+	margin:auto;
+}
+#mediaplayer_wrapper{
+	width:590px;
+	padding-bottom:10px;
+}
+#div_list_video{
+	float:left;
+	width:340px;
+	margin-right:12px;
+}
+.main_wrapper{
+	background:none;
+}
+.item_video{
+	width:164px;
+	float:left;
+	margin-right:12px;
+	padding-bottom:12px;
+}
+.item_video img{
+	width:154px;
+	padding:4px;
+	border:1px solid #282828;
+}
+.item_video a{
+	width:145px;
+	padding:4px;
+	display:block;
+	background:#000;
+	opacity:0.6;
+	height:80px;
+	text-decoration: none;
+	margin-top:-96px;
+	margin-left:6px;
+	color:#FFF;
+	display:none;
+}
+.item_video:hover a{
+	display:block;
+}
+		</style>
+			<?php
+			function getYoutubeImg($url)
+
+					{
+
+					        $url_len=strlen($url);
+
+					        $v_pos=strpos($url,'v=');
+
+					        $v=substr($url,$v_pos+2);       
+
+					        if(strpos($v,'&')) $v=substr($v,0,strpos($v,'&'));
+
+							$img="http://i1.ytimg.com/vi/".$v."/mqdefault.jpg";
+
+							return $img;
+
+					}
+
+		$playlist[]=array('file'=>'https://www.youtube.com/watch?v=79k04TqI7wQ','title'=>'Để lòng cảm thấy nhẹ nhàng','img'=>getYoutubeImg('https://www.youtube.com/watch?v=79k04TqI7wQ'));
+
+		$listvideo[]=array('file'=>'https://www.youtube.com/watch?v=79k04TqI7wQ','title'=>'Để lòng cảm thấy nhẹ nhàng','img'=>getYoutubeImg('https://www.youtube.com/watch?v=79k04TqI7wQ'));
+
+		$playlist[]=array('file'=>'https://www.youtube.com/watch?v=EL_8iyMEbnE','title'=>'Sống xa anh chẳng dễ dàng','img'=>getYoutubeImg('https://www.youtube.com/watch?v=EL_8iyMEbnE'));
+
+		$listvideo[]=array('file'=>'https://www.youtube.com/watch?v=EL_8iyMEbnE','title'=>'Sống xa anh chẳng dễ dàng','img'=>getYoutubeImg('https://www.youtube.com/watch?v=EL_8iyMEbnE')); 
+
+		$playlist[]=array('file'=>'https://www.youtube.com/watch?v=VSo_rbTkpqE','title'=>'Ôi người điên','img'=>getYoutubeImg('https://www.youtube.com/watch?v=VSo_rbTkpqE'));
+
+		$listvideo[]=array('file'=>'https://www.youtube.com/watch?v=VSo_rbTkpqE','title'=>'Ôi người điên','img'=>getYoutubeImg('https://www.youtube.com/watch?v=VSo_rbTkpqE'));
+
+		$playlist[]=array('file'=>'https://www.youtube.com/watch?v=VSo_rbTkpqE','title'=>'Đến trái tim anh','img'=>getYoutubeImg('https://www.youtube.com/watch?v=VSo_rbTkpqE'));
+
+		$listvideo[]=array('file'=>'https://www.youtube.com/watch?v=3r6CiOmi7l4','title'=>'Đến trái tim anh','img'=>getYoutubeImg('https://www.youtube.com/watch?v=3r6CiOmi7l4'));
+		$playlist[]=array('file'=>'https://www.youtube.com/watch?v=JIOr7BiF1Ow','title'=>'Phim hành đồng lồng nhạc remix','img'=>getYoutubeImg('https://www.youtube.com/watch?v=JIOr7BiF1Ow'));
+
+		$listvideo[]=array('file'=>'https://www.youtube.com/watch?v=JIOr7BiF1Ow','title'=>'Phim hành đồng lồng nhạc remix','img'=>getYoutubeImg('https://www.youtube.com/watch?v=JIOr7BiF1Ow'));
+	
+	$playlist=json_encode($playlist);
+	?>
+    <h1>Danh sách nhạc accoustic của Pana <3 </h1>
+    <div class="detail_right" style="width:630px">
+    <div id="video_page">
+	<div id="div_list_video">
+	<div class="list_video">
+	<?php $i=1; foreach($listvideo as $list)
+	{?>
+		<div class="item_video" <? if($i%2==0){?> style="margin-right:0;" <? } ?>>
+		<img src="<?=$list['img']?>" alt="<?=$list['title']?>" />
+		<a href="javascript:;" onclick="play_video('<?=$list['file']?>','<?=$list['img']?>','<?=$list['title']?>');">
+		<?=$list['title']?></a>
+		</div>
+		<? if($i%2==0){?> <? } $i++;  
+	}?>	
+	</div>
+	</div>
+    <div class="div_media">
+    <div id="mediaplayer"></div>
+    <h4 id="title_video">Playlist</h4>
+    <div class="tgp_clr_left"></div>
+    </div>
+    </div>
+    <?php print_r($playlist) ?>
+<br clear="all" />
+<script src="jwplayer/jwplayer.js" language="javascript" type="text/javascript"></script>
+<script>jwplayer.key="0CJoG/Tq23g9dKhQhuKJ5WOkp72OPZfP1SZ8dA==";</script>
+<script type="text/javascript">
+	play_video('<?=$playlist?>','0','0');
+	function play_video(url,img,title)
+	{
+		var img=img;
+		var url=url;
+		var title=title;
+		if(img=='0')
+		{
+		jwplayer("mediaplayer").setup({
+			flashplayer: 'jwplayer/jwplayer.flash.swf',
+			playlist: jQuery.parseJSON(url),
+		autostart: true,
+		backcolor: "transparent",
+		frontcolor: "#CCC",
+		repeat: "always",
+		width: 610,
+		height: 381});	
+		}
+		else
+		{
+		$('#title_video').text(""+title+"");
+		$('h4').css( "padding-bottom", "5" )
+		jwplayer("mediaplayer").setup({
+			flashplayer: 'jwplayer/jwplayer.flash.swf',
+
+			file: ""+url+"",
+			autostart: true,
+			backcolor: "transparent",
+			frontcolor: "#F00",
+			width: 610,
+			height: 381,
+			image: ""+img+"",
+			player: {
+		modes: {
+          linear: {
+             hideLogo: false,
+			 hideLogoOnLinearPlayback: true
+         		  }
+    			}
+					},
+			});
+			}
+		}
+  </script>
+</body>
+</html>
